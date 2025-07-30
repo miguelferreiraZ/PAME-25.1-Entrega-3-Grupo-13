@@ -3,16 +3,28 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  
+  /* Paleta de Cores Personalizada */
+  --color-pink-primary: #ec4772;
+  --color-yellow-primary: #ec4772; /* Nota: Parece ser a mesma cor que o rosa na imagem */
+  --color-burgundy: #ba0a4c;
+  --color-peach: #fff1e5;
+  --color-red-primary: #ed0150;
+  --color-pink-light: #fe9cc1;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  
+  /* Cores da Paleta */
+  --color-pink-primary: var(--color-pink-primary);
+  --color-yellow-primary: var(--color-yellow-primary);
+  --color-burgundy: var(--color-burgundy);
+  --color-peach: var(--color-peach);
+  --color-red-primary: var(--color-red-primary);
+  --color-pink-light: var(--color-pink-light);
 }
 
-@media (prefers-color-scheme: dark) {
+@media (prefers-color-scheme: white) {
   :root {
     --background: #0a0a0a;
     --foreground: #ededed;
