@@ -1,7 +1,6 @@
-"use client";
+'use client';
 
-import { useRouter } from "next/navigation";
-import React from "react";
+import { useRouter } from 'next/navigation' // <- useRouter vem de next/router no pages/
 
 export default function Login() {
   const router = useRouter();
@@ -24,3 +23,4 @@ export default function Login() {
     </div>
   );
 }
+

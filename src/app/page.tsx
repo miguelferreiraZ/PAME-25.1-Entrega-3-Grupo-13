@@ -1,12 +1,12 @@
+import HamburgerMenu from "./components/HamburgerMenu";
 
 export default function Home() {
   return (
-    <div className="flex flex-col">
+    <div className="flex flex-col relative">
       <div className="flex h-15 w-full bg-peach border-b-2 justify-between px-5 items-center flex-row"> {/* header */}
       
         <div>
-          {/* text-header-components */}
-          teste
+          <HamburgerMenu />
         </div>
         <div>
           {/* image-logo */}
