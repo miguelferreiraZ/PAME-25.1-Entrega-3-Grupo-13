@@ -11,14 +11,16 @@ export default function Login() {
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-blue-100">
-      <form onSubmit={handleLogin} className="bg-white p-8 rounded shadow-md w-80">
-        <h1 className="text-2xl font-bold mb-4 text-center">Login</h1>
+    <div className="flex items-center justify-center min-h-screen bg-gradient-to-r from-yellow-300 to-pink-500">
+      <form onSubmit={handleLogin} className="bg-white p-8 rounded shadow-md w-full max-w-md">
+        <img src="/id-visual4.png" alt="ID Visual" className="w-40 mx-auto mb-4" />
+        <h1 className="text-2xl font-bold mb-6 text-center">Login</h1>
         <input type="text" placeholder="Email" className="w-full mb-3 p-2 border rounded" required />
-        <input type="password" placeholder="Senha" className="w-full mb-3 p-2 border rounded" required />
-        <button type="submit" className="w-full bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 rounded">
+        <input type="password" placeholder="Senha" className="w-full mb-6 p-2 border rounded" required />
+        <button type="submit" className="w-full bg-yellow-300 hover:bg-yellow-600 text-white font-semibold py-2 rounded">
           Entrar
         </button>
+        <img src="/id-visual5.png" alt="ID Visual 2" className="w-20 mx-auto mt-7" />
       </form>
     </div>
   );

@@ -10,7 +10,7 @@ export default function Home() {
         </div>
         <div>
           {/* image-logo */}
-          teste
+          <img src='/id-visual3.png' alt='ID Visual 3' className='w-30 p-2 mx-auto' />
         </div>
         <div>
           {/* icon-components */}
@@ -46,22 +46,30 @@ export default function Home() {
         <div className="flex font-extrabold justify-center pt-15">
           Enjoy our Purposefuel
         </div>
-        <div className="flex flex-col md:flex-row border-b-2 pb-15">
-          {/* pirulitos-content */}
-
-          {/* componente maior, esse eh col normal md:row */}
-          <div>
-            {/* component img + text embaixo + preço?*/}
+        <div className="flex flex-col md:flex-row items-center justify-between px-6 md:px-16 py-8 gap-8 border-b-2">
+          <div className="flex flex-col items-center justify-center w-full md:w-1/3">
+            <div className="flex flex-col items-center bg-pink-300 border-2 p-8">
+              <img src="/produto1.png" alt="Produto 1" className="w-40 md:w-52 lg:w-60" />
+              
+            </div>
+            <p className="mt-4 font-semibold">CherryZ Sem Açúcar</p>
           </div>
-          <div>
-            {/* component img + text embaixo + preço? */}
+          <div className="flex flex-col justify-center items-center w-full md:w-1/3">
+            <div className="flex flex-col items-center bg-orange-300 border-2 p-8">
+              <img src="/produto2.png" alt="Produto 2" className="w-40 md:w-52 lg:w-60" />
+              
+            </div>
+            <p className="mt-4 font-semibold">CherryZ com Vitamina C</p>
           </div>
-          <div>
-            {/* component img + text embaixo + preço? */}
+          <div className="flex flex-col items-center justify-center w-full md:w-1/3">
+            <div className="flex flex-col items-center bg-purple-300 border-2 p-8">
+              <img src="/produto3.png" alt="Produto 3" className="w-40 md:w-52 lg:w-60" />
+              
+            </div>
+            <p className="mt-4 font-semibold">CherryZ com Melatonina</p>
           </div>
-          {/* componente maior */}
-
         </div>
+
       </div>
 
       {/* +infos */}
@@ -83,7 +91,6 @@ export default function Home() {
             c {/* component */}
             c {/* component */}
           </div>
-          <div>contact</div>
         </div>
       </footer>
     </div>
