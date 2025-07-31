@@ -20,7 +20,7 @@ export default function HamburgerMenu() {
       )}
       
       {/* Sidebar */}
-      <div className={`fixed top-0 left-0 h-full w-64 bg-white shadow-lg transform transition-transform duration-300 z-50 ${
+      <div className={`fixed top-0 left-0 h-full w-64 bg-peach shadow-lg transform transition-transform duration-300 z-50 ${
         sidebarOpen ? 'translate-x-0' : '-translate-x-full'
       }`}>
         <div className="p-4">
@@ -31,9 +31,9 @@ export default function HamburgerMenu() {
             </button>
           </div>
           <nav className="space-y-4">
-            <a href="#" className="block py-2 px-4 text-gray-700 hover:bg-peach hover:text-burgundy rounded">Home</a>
-            <a href="../pages/login" className="block py-2 px-4 text-gray-700 hover:bg-peach hover:text-burgundy rounded">Produtos</a>
-            <a href="#" className="block py-2 px-4 text-gray-700 hover:bg-peach hover:text-burgundy rounded">Favoritos</a>
+            <a href="#" className="block py-2 px-4 text-gray-700 hover:bg-peach hover:text-burgundy  border-y-1">Home</a>
+            <a href="../login" className="block py-2 px-4 text-gray-700 hover:bg-peach hover:text-burgundy  border-y-1">Login</a>
+            <a href="#" className="block py-2 px-4 text-gray-700 hover:bg-peach hover:text-burgundy  border-y-1">Favoritos</a>
           </nav>
         </div>
       </div>
@@ -41,7 +41,7 @@ export default function HamburgerMenu() {
       {/* Hamburger Menu Button */}
       <button 
         onClick={toggleSidebar}
-        className="flex flex-col justify-center items-center w-8 h-8 space-y-1 hover:bg-pink-light hover:bg-opacity-30 p-1 rounded transition-colors"
+        className="flex flex-col justify-center items-center w-8 h-8 space-y-1 hover:bg-pink-light hover:bg-opacity-30 p-1 transition-colors"
       >
         <div className="w-6 h-0.5 bg-burgundy"></div>
         <div className="w-6 h-0.5 bg-burgundy"></div>
