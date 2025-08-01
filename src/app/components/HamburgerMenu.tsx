@@ -1,12 +1,33 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import Link from "next/link";
 
 export default function HamburgerMenu() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [showFavorites, setShowFavorites] = useState(false);
+  const [favorites, setFavorites] = useState([]);
 
   const toggleSidebar = () => {
     setSidebarOpen(!sidebarOpen);
+    setShowFavorites(false); // Reset favorites view when closing
+  };
+
+  const showFavoritesView = () => {
+    setShowFavorites(true);
+    // Carregar favoritos do localStorage
+    const storedFavorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+    setFavorites(storedFavorites);
+  };
+
+  const backToMenu = () => {
+    setShowFavorites(false);
+  };
+
+  const removeFavorite = (productId: string) => {
+    const updatedFavorites = favorites.filter((fav: any) => fav.id !== productId);
+    setFavorites(updatedFavorites);
+    localStorage.setItem('favorites', JSON.stringify(updatedFavorites));
   };
 
   return (
@@ -25,16 +46,70 @@ export default function HamburgerMenu() {
       }`}>
         <div className="p-4">
           <div className="flex justify-between items-center mb-6">
-            <h2 className="text-xl font-bold text-burgundy">Menu</h2>
-            <button onClick={toggleSidebar} className="text-gray-600 hover:text-burgundy">
-              
+            <h2 className="text-xl font-bold text-burgundy">
+              {showFavorites ? 'Favoritos' : 'Menu'}
+            </h2>
+            <button onClick={toggleSidebar} className="text-gray-600 hover:text-burgundy text-2xl">
+              ×
             </button>
           </div>
-          <nav className="space-y-4">
-            <a href="#" className="block py-2 px-4 text-gray-700 hover:bg-peach hover:text-burgundy  border-y-1">Home</a>
-            <a href="../login" className="block py-2 px-4 text-gray-700 hover:bg-peach hover:text-burgundy  border-y-1">Login</a>
-            <a href="#" className="block py-2 px-4 text-gray-700 hover:bg-peach hover:text-burgundy  border-y-1">Favoritos</a>
-          </nav>
+
+          {showFavorites ? (
+            // View dos Favoritos
+            <div>
+              <button 
+                onClick={backToMenu}
+                className="mb-4 text-burgundy hover:underline flex items-center"
+              >
+                ← Voltar ao Menu
+              </button>
+              
+              {favorites.length === 0 ? (
+                <div className="text-center text-gray-500 mt-8">
+                  <p>Nenhum produto favoritado</p>
+                  <p className="text-sm mt-2">Clique na estrela dos produtos para favoritar!</p>
+                </div>
+              ) : (
+                <div className="space-y-3">
+                  {favorites.map((product: any) => (
+                    <div key={product.id} className="bg-white rounded-lg p-3 shadow-sm border">
+                      <div className="flex items-center justify-between">
+                        <div className="flex items-center space-x-3">
+                          <img 
+                            src={product.imageSrc} 
+                            alt={product.title}
+                            className="w-12 h-12 object-cover rounded"
+                          />
+                          <div>
+                            <h3 className="font-semibold text-sm text-gray-800">{product.title}</h3>
+                            <p className="text-red-primary font-bold text-sm">{product.price}</p>
+                          </div>
+                        </div>
+                        <button
+                          onClick={() => removeFavorite(product.id)}
+                          className="text-red-500 hover:text-red-700 text-lg"
+                        >
+                          🗑️
+                        </button>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+          ) : (
+            // Menu Principal
+            <nav className="space-y-4">
+              <Link href="/" className="block py-2 px-4 text-gray-700 hover:bg-peach hover:text-burgundy  border-y-1">Home</Link>
+              <Link href="/login" className="block py-2 px-4 text-gray-700 hover:bg-peach hover:text-burgundy  border-y-1">Login</Link>
+              <button 
+                onClick={showFavoritesView}
+                className="block py-2 px-4 text-gray-700 hover:bg-peach hover:text-burgundy border-y-1 w-full text-left"
+              >
+                Favoritos
+              </button>
+            </nav>
+          )}
         </div>
       </div>
 

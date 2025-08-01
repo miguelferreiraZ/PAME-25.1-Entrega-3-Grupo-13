@@ -1,6 +1,10 @@
 "use client";
 
+import { useState, useEffect } from 'react';
+import { cartUtils } from '../utils/cartUtils';
+
 interface ProductCardProps {
+  id: string;
   imageSrc: string;
   title: string;
   price?: string;
@@ -13,6 +17,7 @@ interface ProductCardProps {
 }
 
 export default function ProductCard({
+  id,
   imageSrc,
   title,
   price = "R$ 2,50",
@@ -23,6 +28,42 @@ export default function ProductCard({
   imageAlt,
   className = ""
 }: ProductCardProps) {
+  const [isLiked, setIsLiked] = useState(false);
+  const [isFavorited, setIsFavorited] = useState(false);
+
+  // Verificar se o produto já está nos favoritos ao carregar
+  useEffect(() => {
+    const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+    const isAlreadyFavorited = favorites.find((fav: any) => fav.id === id);
+    setIsFavorited(!!isAlreadyFavorited);
+  }, [id]);
+
+  const handleHeartClick = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    setIsLiked(!isLiked);
+  };
+
+  const handleStarClick = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    const newFavoriteState = !isFavorited;
+    setIsFavorited(newFavoriteState);
+    
+    // Adicionar/remover dos favoritos no localStorage
+    let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+    
+    if (newFavoriteState) {
+      // Adicionar aos favoritos
+      const product = { id, title, imageSrc, price };
+      if (!favorites.find((fav: any) => fav.id === id)) {
+        favorites.push(product);
+      }
+    } else {
+      // Remover dos favoritos
+      favorites = favorites.filter((fav: any) => fav.id !== id);
+    }
+    
+    localStorage.setItem('favorites', JSON.stringify(favorites));
+  };
   return (
     <div className={`flex flex-col items-center justify-center w-full md:w-1/3 ${className}`}>
       <div 
@@ -36,16 +77,51 @@ export default function ProductCard({
         />
       </div>
       <p className="mt-4 font-semibold text-center cursor-pointer" onClick={onClick}>{title}</p>
-      <p className="mt-1 text-lg font-bold text-red-primary">{price}</p>
-      <button 
-        className={`mt-3 ${buttonColor} text-peach px-4 py-2 rounded-lg hover:opacity-80 transition-opacity text-sm font-medium cursor-pointer`}
-        onClick={(e) => {
-          e.stopPropagation();
-          onAddToCart?.();
-        }}
-      >
-        Adicionar ao Carrinho
-      </button>
+      <p className="mt-1 text-lg font-bold text-red-primary mb-3">{price}</p>
+        
+      <div className="w-full flex flex-col gap-3">
+        {/* Botão */}
+        <div className="flex justify-center">
+          <button 
+            className={`${buttonColor} text-peach px-4 py-2 rounded-lg hover:opacity-80 transition-opacity text-sm font-medium cursor-pointer`}
+            onClick={(e) => {
+              e.stopPropagation();
+              if (onAddToCart) {
+                onAddToCart();
+              } else {
+                cartUtils.addToCart({ id, title, imageSrc, price });
+              }
+            }}
+          >
+            Adicionar ao Carrinho
+          </button>
+        </div>
+        
+        {/* Ícones */}
+        <div className="flex flex-row gap-3 justify-center">
+          <div className="w-6 h-6 cursor-pointer hover:scale-110 transition-transform" onClick={handleHeartClick}>
+            <img 
+              src={isLiked ? "/heart-full.svg" : "/heart.svg"} 
+              alt="Curtir" 
+              className={`w-full h-full transition-all ${isLiked ? 'brightness-0 saturate-100' : ''}`}
+              style={isLiked ? { 
+                filter: 'brightness(0) saturate(100%) invert(16%) sepia(99%) saturate(7404%) hue-rotate(359deg) brightness(95%) contrast(118%)' 
+              } : {}}
+            />
+          </div>
+          <div className="w-6 h-6 cursor-pointer hover:scale-110 transition-transform" onClick={handleStarClick}>
+            <img 
+              src={isFavorited ? "/star-full.svg" : "/star.svg"} 
+              alt="Favoritar" 
+              className={`w-full h-full transition-all`}
+              style={isFavorited ? { 
+                filter: 'brightness(0) saturate(100%) invert(84%) sepia(72%) saturate(2032%) hue-rotate(1deg) brightness(101%) contrast(101%)'
+              } : {}}
+
+            />
+          </div>
+        </div>
+      </div>
     </div>
   );
 }
