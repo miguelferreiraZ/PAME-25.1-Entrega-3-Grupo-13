@@ -1,4 +1,6 @@
+/* eslint-disable @next/next/no-img-element */
 "use client";
+import {useFavorites} from "../context/FavoritesContext";
 
 interface ProductCardProps {
   imageSrc: string;
@@ -23,12 +25,31 @@ export default function ProductCard({
   imageAlt,
   className = ""
 }: ProductCardProps) {
+
+  const { toggleFavorite, isFavorite } = useFavorites();
+  const favorito = isFavorite(title); // true ou false
+
   return (
     <div className={`flex flex-col items-center justify-center w-full md:w-1/3 ${className}`}>
       <div 
-        className={`flex flex-col items-center ${backgroundColor} border-2 p-8 cursor-pointer hover:opacity-90 transition-opacity`}
+        className={`relative flex flex-col items-center ${backgroundColor} border-2 p-8 cursor-pointer hover:opacity-90 transition-opacity`}
         onClick={onClick}
       >
+        {/* Ícone de coração */}
+        <button
+          onClick={(e) => {
+            e.stopPropagation(); // impede clique na div principal
+            toggleFavorite({ title, imageSrc });
+          }}
+          className="absolute top-2 right-2"
+        >
+          <img
+            src={favorito ? "/heart-filled.png" : "/heart-outline.png"}
+            alt="Favorito"
+            className="w-6 h-6"
+          />
+        </button>
+
         <img 
           src={imageSrc} 
           alt={imageAlt || title} 
