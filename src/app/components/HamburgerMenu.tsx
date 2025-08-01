@@ -1,17 +1,10 @@
-/* eslint-disable @next/next/no-img-element */
 "use client";
-<<<<<<< HEAD
-import { useFavorites } from "../context/FavoritesContext"
-import { useState } from "react";
-=======
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
->>>>>>> 42de7ad7b113aa09c0d5ff91d48522fcfcc2a482
+import React from 'react';
 
 export default function HamburgerMenu() {
-  const { favorites } = useFavorites();
-  const [mostrarFavoritos, setMostrarFavoritos] = useState(false);
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [showFavorites, setShowFavorites] = useState(false);
   const [favorites, setFavorites] = useState([]);
@@ -61,37 +54,6 @@ export default function HamburgerMenu() {
               ×
             </button>
           </div>
-<<<<<<< HEAD
-          <nav className="space-y-4">
-            <a href="#" className="block py-2 px-4 text-gray-700 hover:bg-peach hover:text-burgundy  border-y-1">Home</a>
-
-            <a href="../login" className="block py-2 px-4 text-gray-700 hover:bg-peach hover:text-burgundy  border-y-1">Login</a>
-
-            <div className="px-4 py-2 border-t border-b cursor-pointer" onClick={() => setMostrarFavoritos(!mostrarFavoritos)}>
-              <div className="flex justify-between items-center text-gray-700 hover:text-burgundy">
-                <span className="font-semibold">Favoritos</span>
-                <span>{mostrarFavoritos ? "▲" : "▼"}</span>
-              </div>
-
-              {/* Lista de favoritos visível somente quando expandido */}
-              {mostrarFavoritos && (
-                <div className="mt-2 space-y-2">
-                  {favorites.length === 0 ? (
-                    <p className="text-sm text-gray-500">Nenhum favorito.</p>
-                  ) : (
-                    favorites.map((item, index) => (
-                      <div key={index} className="flex items-center gap-2">
-                        <img src={item.imageSrc} alt={item.title} className="w-8 h-8 rounded" />
-                        <span className="text-sm text-gray-800">{item.title}</span>
-                      </div>
-                    ))
-                  )}
-                </div>
-              )}
-            </div>
-
-          </nav>
-=======
 
           {showFavorites ? (
             // View dos Favoritos
@@ -149,7 +111,6 @@ export default function HamburgerMenu() {
               </button>
             </nav>
           )}
->>>>>>> 42de7ad7b113aa09c0d5ff91d48522fcfcc2a482
         </div>
       </div>
 

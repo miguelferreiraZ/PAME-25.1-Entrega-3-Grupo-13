@@ -1,8 +1,8 @@
-/* eslint-disable @next/next/no-img-element */
 'use client';
 
 import { useRouter } from 'next/navigation'
 import LogoLink from '../components/LogoLink'
+import React from 'react';
 
 export default function Login() {
   const router = useRouter();

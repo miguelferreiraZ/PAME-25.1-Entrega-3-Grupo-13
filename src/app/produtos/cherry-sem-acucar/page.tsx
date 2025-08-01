@@ -1,4 +1,5 @@
 import ProductPage from '../../components/ProductPage';
+import React from 'react';
 
 export default function CherrySemAcucar() {
   return (
@@ -22,7 +23,7 @@ export default function CherrySemAcucar() {
         "Ácido cítrico",
         "Extrato de urucum a base norbixina"
       ]}
-      price="R$ 2,50"
+      price="R$ 3,34"
     />
   );
 }

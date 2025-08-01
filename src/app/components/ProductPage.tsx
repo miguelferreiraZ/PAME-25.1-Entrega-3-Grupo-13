@@ -3,6 +3,7 @@
 import LogoLink from './LogoLink';
 import HeartButton from './HeartButton';
 import StarButton from './StarButton';
+import React from 'react';
 
 interface ProductPageProps {
   id: string;

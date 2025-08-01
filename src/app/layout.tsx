@@ -1,15 +1,8 @@
 import "./globals.css";
 
-import { CartProvider } from "./context/CartContext";
-import { FavoritesProvider } from "./context/FavoritesContext"
-import { Lobster } from 'next/font/google';
-
-const lobster = Lobster({
-  subsets: ['latin'],
-  weight: '400',
-
-});
-
+import { CartProvider } from "./contexts/CartContext";
+import { FavoritesProvider } from "./contexts/FavoritesContext"
+import React from 'react';
 
 
 export const metadata = {
@@ -24,7 +17,7 @@ export default function RootLayout({
 }) {
   return (
     <html>
-      <body className={lobster.className}>
+      <body>
         <CartProvider>
           <FavoritesProvider>
             {children}

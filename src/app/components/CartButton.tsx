@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { cartUtils } from '../utils/cartUtils';
+import React from 'react';
 
 interface CartButtonProps {
   onClick?: () => void;

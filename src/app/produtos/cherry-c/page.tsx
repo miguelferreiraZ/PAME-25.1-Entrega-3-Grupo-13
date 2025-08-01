@@ -1,4 +1,5 @@
 import ProductPage from '../../components/ProductPage';
+import React from 'react';
 
 export default function CherryVitaminaC() {
   return (

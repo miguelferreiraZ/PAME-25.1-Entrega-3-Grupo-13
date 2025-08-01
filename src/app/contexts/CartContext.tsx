@@ -123,3 +123,7 @@ export function useCart() {
   }
   return context;
 }
+
+export function  useFavorites(){
+
+}
